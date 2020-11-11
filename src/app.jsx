@@ -38,8 +38,8 @@ const renderApp = () => {
             {app.subtitle && <p>{app.subtitle}</p>}
             <p>{app.options.length > 0 ? "Here are your options:" : "No options available"}</p>
             <p>You have {app.options.length} options.</p>
-            <button onClick={onMakeDecision}>What should I do now?</button>
-            <button onClick={resetOptions}>Reset options</button>
+            <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do now?</button>
+            <button  onClick={resetOptions}>Reset options</button>
             <ol>
                 {app.options.map((option, index) => <li key={index}>{option}</li>)}
             </ol>
