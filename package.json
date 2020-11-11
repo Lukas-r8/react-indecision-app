@@ -1,6 +1,12 @@
 {
   "name": "indecision-app",
   "version": "1.0.0",
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      "syntax-optional-chaining"
+    ]
+  },
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -11,5 +17,9 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1"
+  },
+  "devDependencies": {
+    "babel-plugin-syntax-optional-chaining": "^7.0.0-alpha.13",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   }
 }
