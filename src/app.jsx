@@ -1,36 +1,42 @@
 console.log("App.jsx is running!");
-
-let app = {
+// babel src/app.jsx --out-file public/scripts/app.js --presets=env,react --watch
+const app = {
     title: "Indecision App",
-    subtitle: "Indecision info"
+    subtitle: "Indecision info",
+    options: []
 };
 
-var template = (
+// console.log(app.options?.lenght);
+
+const template = (
     <div>
         <h1>{app.title}</h1>
-        <p>{app.subtitle}</p>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0 ? "Here are your options:" : "No options available"}</p>
         <ol>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
+            {app.options.map((option, index) => <li key={index}>{option}</li>)}
         </ol>
     </div>
 );
 
-var user = {
+const user = {
     name: "Lucas Alves Da Silva",
     age: 29,
     location: "San Sebastian"
+};
+
+function getLocation(location) {
+    return (location != null) ? <p>Location: {location}</p> : undefined;
 }
 
-var myTemplate = (
+const myTemplate = (
     <div>
-        <h1>{user.name}</h1>
-        <p>Age: {user.age}</p>
-        <p>Location: {user.location}</p>
+        <h1>{user.name ? user.name : "Anonymous"}</h1>
+        {user.age >= 18 && <p>Age: {user.age}</p>}
+        {getLocation(user.location)}
     </div>
 );
 
-var appRoot = document.getElementById("app");
+const appRoot = document.getElementById("app");
 
 ReactDOM.render(template, appRoot)
