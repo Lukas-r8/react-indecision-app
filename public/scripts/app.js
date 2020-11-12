@@ -20,12 +20,16 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: "render",
         value: function render() {
+            var title = "Indecision App";
+            var subtitle = "Put your life in the hands of computer";
+            var options = ["thing one", "thing two", "thing three", "four"];
+
             return React.createElement(
                 "div",
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subtitle: subtitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -52,12 +56,12 @@ var Header = function (_React$Component2) {
                 React.createElement(
                     "h1",
                     null,
-                    "Indecision"
+                    this.props.title
                 ),
                 React.createElement(
                     "h2",
                     null,
-                    "Put your life in the hands of a computer!"
+                    this.props.subtitle
                 )
             );
         }
@@ -108,9 +112,16 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement(Option, null),
-                React.createElement(Option, null),
-                React.createElement(Option, null)
+                React.createElement(
+                    "p",
+                    null,
+                    "you have ",
+                    this.props.options.length,
+                    " options"
+                ),
+                this.props.options.map(function (item, index) {
+                    return React.createElement(Option, { key: index, item: item });
+                })
             );
         }
     }]);
@@ -136,7 +147,7 @@ var Option = function (_React$Component5) {
                 React.createElement(
                     "p",
                     null,
-                    "Component option..."
+                    this.props.item
                 )
             );
         }
