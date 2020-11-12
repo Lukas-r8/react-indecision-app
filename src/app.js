@@ -1,5 +1,5 @@
 console.log("App.jsx is running!");
-// babel src/app.jsx --out-file public/scripts/app.js --presets=env,react --watch
+// babel src/app.js --out-file public/scripts/app.js --presets=env,react --watch
 const app = {
     title: "Indecision App",
     subtitle: "Indecision info",
