@@ -1,12 +1,9 @@
 class IndecisionApp extends React.Component {
     constructor(props) {
         super(props)
-        this.title = "Indecision App"
-        this.subtitle = "Put your life in the hands of computer"
         this.state = {
-            options: []
+            options: props.options
         }
-
         this.addOption = this.addOption.bind(this)
         this.removeAllOptions = this.removeAllOptions.bind(this)
         this.handlePick = this.handlePick.bind(this)
@@ -41,7 +38,7 @@ class IndecisionApp extends React.Component {
     render() {
         return (
             <div>
-                <Header title={this.title} subtitle={this.subtitle} />
+                <Header />
                 <Action
                     hasOptions={this.state.options.length > 0}
                     handlePick={this.handlePick}
@@ -54,6 +51,10 @@ class IndecisionApp extends React.Component {
             </div>
         );
     }
+}
+
+IndecisionApp.defaultProps = {
+    options: []
 }
 
 class AddOption extends React.Component {
@@ -92,9 +93,14 @@ const Header = (props) => {
     return (
         <div>
             <h1>{props.title}</h1>
-            <h2>{props.subtitle}</h2>
+            {props.subtitle && <h2>{props.subtitle}</h2>}
         </div>
     )
+}
+
+Header.defaultProps = {
+    title: "Indecision App",
+    subtitle: "Put your life in the hands of computer"
 }
 
 const Action = (props) => {
