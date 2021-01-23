@@ -41,8 +41,13 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+    constructor(props) {
+        super(props);
+        this.removeAll = this.removeAll.bind(this);
+    }
+
     removeAll() {
-        alert("remove all clicked...")
+        alert(`remove all clicked... ${this.props.options}`)
     }
 
     render() {
@@ -68,7 +73,8 @@ class Option extends React.Component {
 
 class AddOption extends React.Component {
     submit(e) {
-        let value = e.target.elements.addOption.value;
+        e.preventDefault();
+        let value = e.target.elements.addOption.value.trim()
         if (value) {
             alert(value)
         }
