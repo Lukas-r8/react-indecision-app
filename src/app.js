@@ -7,6 +7,7 @@ class IndecisionApp extends React.Component {
         this.addOption = this.addOption.bind(this)
         this.removeAllOptions = this.removeAllOptions.bind(this)
         this.handlePick = this.handlePick.bind(this)
+        this.deleteOption = this.deleteOption.bind(this)
     }
 
     addOption(option) {
@@ -16,6 +17,12 @@ class IndecisionApp extends React.Component {
             return "This option already exists"
         }
         this.setState((prev) => ({ options: prev.options.concat(option) }))
+    }
+
+    deleteOption(option) {
+        this.setState(() => ({
+            options: this.state.options.filter(o => o !== option)
+        }));
     }
 
     removeAllOptions() {
@@ -38,6 +45,7 @@ class IndecisionApp extends React.Component {
                 <Options
                     options={this.state.options}
                     removeAll={this.removeAllOptions}
+                    deleteOption={this.deleteOption}
                 />
                 <AddOption addOption={this.addOption} />
             </div>
@@ -111,15 +119,26 @@ const Options = (props) => {
         <div>
             <button onClick={props.removeAll}>Remove all</button>
             <p>you have {props.options.length} options</p>
-            {props.options.map((item, index) => <Option key={index} item={item} />)}
+            {props.options.map((item, index) => (
+                <Option
+                    key={index}
+                    item={item}
+                    deleteOption={props.deleteOption}
+                />
+            ))}
         </div>
     )
 }
 
 const Option = (props) => {
+    const handleRemove = () => {
+        props.deleteOption(props.item)
+    }
+
     return (
         <div>
-            <p>{props.item}</p>
+            {props.item}
+            <button onClick={handleRemove}>remove option</button>
         </div>
     );
 }
