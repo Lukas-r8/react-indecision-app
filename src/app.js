@@ -1,15 +1,56 @@
 class IndecisionApp extends React.Component {
-    render() {
-        const title = "Indecision App"
-        const subtitle = "Put your life in the hands of computer"
-        const options = ["thing one", "thing two", "thing three", "four"]
+    constructor(props) {
+        super(props)
+        this.title = "Indecision App"
+        this.subtitle = "Put your life in the hands of computer"
+        this.state = {
+            options: []
+        }
 
+        this.addOption = this.addOption.bind(this)
+        this.removeAllOptions = this.removeAllOptions.bind(this)
+        this.handlePick = this.handlePick.bind(this)
+    }
+
+    addOption(option) {
+        if (!option) {
+            return "Enter a valid option"
+        } else if (this.state.options.indexOf(option) > -1) {
+            return "This option already exists"
+        }
+        this.setState((prev) => {
+            return {
+                options: prev.options.concat(option)
+            }
+        })
+    }
+
+    removeAllOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            }
+        })
+    }
+
+    handlePick() {
+        const randomIndex = Math.floor(Math.random() * this.state.options.length)
+        alert(this.state.options[randomIndex]);
+    }
+
+    render() {
         return (
             <div>
-                <Header title={title} subtitle={subtitle} />
-                <Action />
-                <Options options={options} />
-                <AddOption />
+                <Header title={this.title} subtitle={this.subtitle} />
+                <Action
+                    hasOptions={this.state.options.length > 0}
+                    handlePick={this.handlePick}
+                />
+                <Options
+                    options={this.state.options}
+                    removeAll={this.removeAllOptions}
+                />
+                <AddOption addOption={this.addOption} />
             </div>
         );
     }
@@ -27,33 +68,25 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-    handlePick() {
-        console.log("Handle pick..........");
-    }
-
     render() {
         return (
             <div>
-                <button onClick={this.handlePick}>What should I do?</button>
+                <button
+                    onClick={this.props.handlePick}
+                    disabled={!this.props.hasOptions}
+                >
+                    What should I do?
+                </button>
             </div>
         )
     }
 }
 
 class Options extends React.Component {
-    constructor(props) {
-        super(props);
-        this.removeAll = this.removeAll.bind(this);
-    }
-
-    removeAll() {
-        alert(`remove all clicked... ${this.props.options}`)
-    }
-
     render() {
         return (
             <div>
-                <button onClick={this.removeAll}>Remove all</button>
+                <button onClick={this.props.removeAll}>Remove all</button>
                 <p>you have {this.props.options.length} options</p>
                 {this.props.options.map((item, index) => <Option key={index} item={item} />)}
             </div>
@@ -72,17 +105,28 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+    constructor(props) {
+        super(props)
+        this.submit = this.submit.bind(this)
+        this.state = {
+            error: undefined
+        }
+    }
+
     submit(e) {
         e.preventDefault();
-        let value = e.target.elements.addOption.value.trim()
-        if (value) {
-            alert(value)
-        }
+        const option = e.target.elements.addOption.value.trim()
+        e.target.elements.addOption.value = "" 
+        const error = this.props.addOption(option)
+        this.setState(() => {
+            return { error };
+        })
     }
 
     render() {
         return (
             <div>
+                {this.state.error && <p style={{ color: "red" }}>{this.state.error}</p>}
                 <form onSubmit={this.submit}>
                     <input type="text" name="addOption" />
                     <button type="submit">Add Option</button>
