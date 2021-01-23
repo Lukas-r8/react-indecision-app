@@ -56,6 +56,38 @@ class IndecisionApp extends React.Component {
     }
 }
 
+class AddOption extends React.Component {
+    constructor(props) {
+        super(props)
+        this.submit = this.submit.bind(this)
+        this.state = {
+            error: undefined
+        }
+    }
+
+    submit(e) {
+        e.preventDefault();
+        const option = e.target.elements.addOption.value.trim()
+        e.target.elements.addOption.value = ""
+        const error = this.props.addOption(option)
+        this.setState(() => {
+            return { error };
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.error && <p style={{ color: "red" }}>{this.state.error}</p>}
+                <form onSubmit={this.submit}>
+                    <input type="text" name="addOption" />
+                    <button type="submit">Add Option</button>
+                </form>
+            </div>
+        )
+    }
+}
+
 const Header = (props) => {
     return (
         <div>
@@ -94,38 +126,6 @@ const Option = (props) => {
             <p>{props.item}</p>
         </div>
     );
-}
-
-class AddOption extends React.Component {
-    constructor(props) {
-        super(props)
-        this.submit = this.submit.bind(this)
-        this.state = {
-            error: undefined
-        }
-    }
-
-    submit(e) {
-        e.preventDefault();
-        const option = e.target.elements.addOption.value.trim()
-        e.target.elements.addOption.value = ""
-        const error = this.props.addOption(option)
-        this.setState(() => {
-            return { error };
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                {this.state.error && <p style={{ color: "red" }}>{this.state.error}</p>}
-                <form onSubmit={this.submit}>
-                    <input type="text" name="addOption" />
-                    <button type="submit">Add Option</button>
-                </form>
-            </div>
-        )
-    }
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"))
