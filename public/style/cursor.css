@@ -4,7 +4,6 @@ body {
 
 .invisible {
     visibility: hidden;
-    transition: opacity 0s linear;
 }
 
 .cursor {

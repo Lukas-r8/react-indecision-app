@@ -11,13 +11,22 @@ class IndecisionApp extends React.Component {
     }
 
     componentDidMount() {
+        try {
+            const strOptions = localStorage.getItem('options');
+            const options = JSON.parse(strOptions) || [];
+            this.setState(() => ({ options }))
+        } catch (e) {
+            console.error("failed to parse");
+        }
         startCursor();
-        console.log("cursor running");
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length != this.state.options.length) {
+            localStorage.setItem('options', JSON.stringify(this.state.options))
+        }
+
         startCursor();
-        console.log("cursor running updating");
     }
 
     addOption(option) {
@@ -125,10 +134,12 @@ const Action = (props) => {
 }
 
 const Options = (props) => {
+    const optionsCount = props.options.length;
     return (
         <div>
             <button onClick={props.removeAll}>Remove all</button>
-            <p>you have {props.options.length} options</p>
+            <p>you have {optionsCount} options</p>
+            {optionsCount == 0 && <p>Please add an option to get started!</p>}
             {props.options.map((item, index) => (
                 <Option
                     key={index}
