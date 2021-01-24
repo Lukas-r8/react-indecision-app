@@ -27,6 +27,18 @@ var IndecisionApp = function (_React$Component) {
     }
 
     _createClass(IndecisionApp, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            startCursor();
+            console.log("cursor running");
+        }
+    }, {
+        key: "componentDidUpdate",
+        value: function componentDidUpdate() {
+            startCursor();
+            console.log("cursor running updating");
+        }
+    }, {
         key: "addOption",
         value: function addOption(option) {
             if (!option) {

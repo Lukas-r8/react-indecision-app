@@ -10,6 +10,16 @@ class IndecisionApp extends React.Component {
         this.deleteOption = this.deleteOption.bind(this)
     }
 
+    componentDidMount() {
+        startCursor();
+        console.log("cursor running");
+    }
+
+    componentDidUpdate() {
+        startCursor();
+        console.log("cursor running updating");
+    }
+
     addOption(option) {
         if (!option) {
             return "Enter a valid option"
