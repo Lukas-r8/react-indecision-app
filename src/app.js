@@ -1,9 +1,6 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
-import { startCursor } from './cursor.js'
 
-const template = <h1>My h1 tag :)</h1>
-ReactDOM.render(template, document.getElementById('app'))
+import IndecisionApp from './components/IndecisionApp'
 
-
-setTimeout(startCursor, 5000)
+ReactDOM.render(<IndecisionApp />, document.getElementById("app"))
