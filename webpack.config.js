@@ -5,5 +5,30 @@ module.exports = {
     output: {
         path: path.join(__dirname, "public"),
         filename: "bundle.js"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            cacheDirectory: true,
+                            babelrc: false,
+                            presets: [
+                                "@babel/env",
+                                "@babel/react"
+                            ],
+                            plugins: [
+                                "@babel/plugin-proposal-object-rest-spread",
+                                "syntax-optional-chaining"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }

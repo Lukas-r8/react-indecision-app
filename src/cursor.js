@@ -1,4 +1,4 @@
-function startCursor() {
+const startCursor = () => {
     const cursor = document.querySelector('.cursor');
     const elements = document.querySelectorAll('h1, h2, p');
     const excludeElements = document.querySelectorAll('input, button')
@@ -41,3 +41,5 @@ function handleHoverClass(hoverElement, elementOrFunction, classOrFunction, inst
         element.addEventListener('mouseleave', leaveFunction)
     }
 }
+
+export { startCursor }

@@ -1,12 +1,6 @@
 {
   "name": "indecision-app",
   "version": "1.0.0",
-  "babel": {
-    "plugins": [
-      "transform-object-rest-spread",
-      "syntax-optional-chaining"
-    ]
-  },
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -18,7 +12,11 @@
   "author": "Lucas Alves",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "live-server": "^1.2.1",
