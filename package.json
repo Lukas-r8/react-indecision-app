@@ -21,6 +21,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "babel-plugin-syntax-optional-chaining": "^7.0.0-alpha.13",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "webpack": "^5.17.0",

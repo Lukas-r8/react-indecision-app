@@ -8,15 +8,8 @@ import Action from './Action'
 import Options from './Options'
 
 export default class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            options: []
-        }
-        this.addOption = this.addOption.bind(this)
-        this.removeAllOptions = this.removeAllOptions.bind(this)
-        this.handlePick = this.handlePick.bind(this)
-        this.deleteOption = this.deleteOption.bind(this)
+    state = {
+        options: []
     }
 
     componentDidMount() {
@@ -38,7 +31,7 @@ export default class IndecisionApp extends React.Component {
         startCursor();
     }
 
-    addOption(option) {
+    addOption = (option) => {
         if (!option) {
             return "Enter a valid optionm"
         } else if (this.state.options.indexOf(option) > -1) {
@@ -47,17 +40,17 @@ export default class IndecisionApp extends React.Component {
         this.setState((prev) => ({ options: prev.options.concat(option) }))
     }
 
-    deleteOption(option) {
+    deleteOption = (option) => {
         this.setState(() => ({
             options: this.state.options.filter(o => o !== option)
         }));
     }
 
-    removeAllOptions() {
+    removeAllOptions = () => {
         this.setState(() => ({ options: [] }))
     }
 
-    handlePick() {
+    handlePick = () => {
         const randomIndex = Math.floor(Math.random() * this.state.options.length)
         alert(this.state.options[randomIndex]);
     }

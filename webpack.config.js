@@ -23,7 +23,8 @@ module.exports = {
                             ],
                             plugins: [
                                 "@babel/plugin-proposal-object-rest-spread",
-                                "syntax-optional-chaining"
+                                "syntax-optional-chaining",
+                                "@babel/plugin-proposal-class-properties"
                             ]
                         }
                     }
