@@ -61,7 +61,7 @@ export default class IndecisionApp extends React.Component {
         const randomIndex = Math.floor(Math.random() * this.state.options.length)
         alert(this.state.options[randomIndex]);
     }
-
+    
     render() {
         return (
             <div>
