@@ -8,7 +8,7 @@ const Option = (props) => {
     return (
         <div>
             {props.item}
-            <button onClick={handleRemove}>remove option--</button>
+            <button onClick={handleRemove}>remove option</button>
         </div>
     );
 }
