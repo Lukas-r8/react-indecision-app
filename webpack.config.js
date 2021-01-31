@@ -9,7 +9,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -28,6 +28,14 @@ module.exports = {
                             ]
                         }
                     }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
                 ]
             }
         ]
